@@ -57,17 +57,21 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-left"
           >
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-14 leading-tight relative h-24 md:h-32">
-              <motion.div
-                key={currentIndex}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.5 }}
-                className="absolute"
-              >
-                {taglines[currentIndex]}
-              </motion.div>
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-14 leading-tight overflow-hidden">
+              <div className="min-h-[96px] md:min-h-[128px]"> {/* Fixed height based on tallest tagline */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentIndex}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.5 }}
+                    className="h-full"
+                  >
+                    {taglines[currentIndex]}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </h1>
             <p className="text-xl text-gray-600 mb-16 leading-relaxed max-w-xl">
               Transforming healthcare through advanced AI solutions for medical
@@ -98,7 +102,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-xl"
+            className="relative h-[300px] md:h-[500px] rounded-2xl overflow-hidden shadow-xl"
           >
             <AnimatePresence mode="wait">
               <motion.img
